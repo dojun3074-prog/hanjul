@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>불안 한 줄 — 여러분의 이야기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#26233a;--mute:#6b6880;--line:#e4e0f2;--bg1:#f3effc;--bg2:#fbeaf0;--acc:#6a58d0;--acc2:#4b3bb0;--card:#fff}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--bg1),var(--bg2));background-attachment:fixed;min-height:100vh;line-height:1.6;-webkit-text-size-adjust:100%}
+main{max-width:460px;margin:0 auto;padding:0 20px 56px}
+.hero{text-align:center;padding:72px 0 30px}
+.brand{font-size:12.5px;letter-spacing:.08em;color:var(--mute);margin-bottom:22px}
+.q{font-size:24px;font-weight:800;line-height:1.55;letter-spacing:-.5px;margin:0;word-break:keep-all}
+.q em{font-style:normal;background:linear-gradient(transparent 60%,#d9cef9 60%)}
+.ask{font-size:14px;color:var(--mute);margin:26px 0 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 4px 18px rgba(106,88,208,.08)}
+textarea{width:100%;min-height:120px;border:0;padding:4px;font:400 16px/1.65 inherit;font-family:inherit;color:var(--ink);resize:none;background:transparent}
+textarea:focus{outline:none}
+.row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
+.cnt{font-size:12px;color:var(--mute)}
+.btn{border:0;border-radius:12px;padding:10px 20px;font:700 15px inherit;font-family:inherit;color:#fff;background:var(--acc);cursor:pointer}
+.btn:active{background:var(--acc2)}.btn[disabled]{background:#c9c3e6;cursor:not-allowed}
+.msg{font-size:13px;margin:10px 2px 0;color:var(--acc2);min-height:1em}
+.msg.warn{color:#b3402f}
+.help{background:#fff4f2;border:1px solid #f1cfc9;border-radius:14px;padding:14px;margin-top:12px;font-size:14px}
+.help a{display:inline-block;margin-top:8px;font-weight:700;color:#b3402f}
+h2{font-size:17px;margin:44px 0 6px;display:flex;justify-content:space-between;align-items:baseline}
+h2 span{font-size:12.5px;font-weight:500;color:var(--mute)}
+.list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.post{background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.post p{margin:0;font-size:15px;white-space:pre-wrap;word-break:break-word}
+.post .meta{font-size:11.5px;color:var(--mute);margin-top:8px}
+.post.mine{border-color:#bdb2f0;background:#fff}
+.ex{display:inline-block;font-size:10.5px;padding:0 6px;border:1px solid var(--line);border-radius:6px;margin-left:6px}
+.empty{font-size:13.5px;color:var(--mute);text-align:center;padding:18px 0}
+.lock{font-size:13px;color:var(--mute);text-align:center;margin:28px 0 0}
+[hidden]{display:none!important}
+.foot{font-size:11.5px;color:var(--mute);text-align:center;margin-top:40px;line-height:1.7}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="brand">불안 한 줄</div>
+    <p class="q">요즘 내 머릿속을<br>가장 자주 찾아오는 생각은<br><em>‘이미 지나간 일’</em>인가요,<br>아니면 <em>‘아직 오지 않은 내일’</em>인가요?</p>
+    <p class="ask">여러분의 이야기를 공유해주세요</p>
+  </section>
+
+  <div class="box">
+    <textarea id="t" maxlength="300" placeholder="떠오르는 생각을 자유롭게 적어 주세요"></textarea>
+    <div class="row"><span class="cnt" id="c">0 / 300</span><button class="btn" id="b" disabled>공유하기</button></div>
+  </div>
+  <div class="msg" id="m"></div>
+  <div id="help"></div>
+
+  <p class="lock" id="lock">🔒 내 이야기를 공유하면 다른 사람들의 이야기가 열려요</p>
+  <section id="wall" hidden>
+    <h2>모두의 이야기 <span id="n"></span></h2>
+    <div class="list" id="list"></div>
+  </section>
+
+  <p class="foot">익명으로 공유되며 로그인은 필요 없어요.<br>이름·연락처처럼 나를 알 수 있는 정보는 적지 말아 주세요.<br>마음이 많이 힘들다면 109(자살예방상담전화)에서 24시간 이야기할 수 있어요.</p>
+</main>
+<script>
+(function(){
+  // 시연용 초기 글 (실제 운영 전에 SEED=[] 로 비우면 사라져요)
+  var SEED=[
+    ['2026-11-25T23:47','지나간 일이요. 오늘 회의 때 제가 한 말이 계속 떠올라서 아직도 못 자고 있어요. 다들 별생각 없었을 텐데.'],
+    ['2026-11-25T08:12','출근길마다 내일이 먼저 와요. 아직 시작도 안 한 일 걱정하느라 정작 오늘을 놓치는 느낌.'],
+    ['2026-11-24T21:35','둘 다인데 순서가 있어요. 어제 실수한 거 곱씹다가 → 그래서 내일도 망칠 것 같다로 넘어가요.'],
+    ['2026-11-24T13:03','다음 주 면접이요. 아직 날짜도 안 왔는데 머릿속으로는 벌써 열 번은 떨어졌어요.'],
+    ['2026-11-23T01:18','헤어진 지 꽤 됐는데 그때 그 말만 안 했으면 어땠을까 하는 생각이 자꾸 찾아와요.'],
+    ['2026-11-22T17:56','저는 아직 오지 않은 내일 쪽. 졸업하고 뭐 하지, 그 질문이 하루에도 몇 번씩 와요.'],
+    ['2026-11-21T22:40','단톡방에 보낸 메시지에 아무도 답이 없던 순간이 몇 시간째 머물러 있어요. 이미 지나간 일인데도요.'],
+    ['2026-11-20T07:51','눈 뜨자마자 오늘 할 일 목록이 걱정으로 바뀌어요. 적어 보니 생각보다 별거 아닌 것도 많네요.'],
+    ['2026-11-18T19:24','친구랑 어색해진 게 지난달 일인데 아직도 매일 한 번씩 떠올라요. 먼저 연락해 볼까 고민 중이에요.'],
+    ['2026-11-16T00:32','이렇게 적고 보니 저만 그런 게 아니라서 조금 안심돼요. 오늘은 내일 걱정은 내일 하기로 했어요.']
+  ].map(function(r,i){return{id:'seed'+i,text:r[1],created_at:new Date(r[0]+':00+09:00').getTime(),seed:true}});
+  var CRISIS=/(자살|자해|죽고\s*싶|죽을래|죽어\s*버|죽고\s*만|목숨|사라지고\s*싶|끝내고\s*싶|살기\s*싫|살고\s*싶지)/;
+  var PII=/(0\d{1,2}[-\s.]?\d{3,4}[-\s.]?\d{4})|([\w.+-]+@[\w-]+\.[\w.]+)|(@[\w.]{3,})/;
+  var LS='hanjul_stories_v2',LSK='hanjul_shared_v2';
+  function unlock(){document.getElementById('wall').hidden=false;document.getElementById('lock').hidden=true;try{localStorage.setItem(LSK,'1')}catch(e){}}
+  var t=document.getElementById('t'),b=document.getElementById('b'),c=document.getElementById('c'),
+      m=document.getElementById('m'),help=document.getElementById('help'),list=document.getElementById('list'),n=document.getElementById('n');
+  var posts=[],mine={},db=null,sending=false;
+
+  function el(tag,cls,tx){var e=document.createElement(tag);if(cls)e.className=cls;if(tx!==undefined)e.textContent=tx;return e}
+  function ago(ts){var d=new Date(ts),h=d.getHours(),mi=('0'+d.getMinutes()).slice(-2);
+    return d.getFullYear()+'. '+(d.getMonth()+1)+'. '+d.getDate()+'.  '+(h<12?'오전 ':'오후 ')+((h%12)||12)+':'+mi}
+  function loadLocal(){try{return JSON.parse(localStorage.getItem(LS)||'[]')}catch(e){return[]}}
+  function saveLocal(a){try{localStorage.setItem(LS,JSON.stringify(a.slice(0,500)))}catch(e){}}
+
+  function render(){
+    list.innerHTML='';
+    var rows=posts.concat(SEED).sort(function(a,b){return b.created_at-a.created_at});
+    n.textContent=rows.length?rows.length+'개':'';
+    rows.forEach(function(p){
+      var d=el('div','post'+(mine[p.id]?' mine':''));d.appendChild(el('p','',p.text));
+      d.appendChild(el('div','meta',(mine[p.id]?'내 글 · ':'')+ago(p.created_at)));list.appendChild(d)});
+    if(!rows.length)list.appendChild(el('div','empty','아직 올라온 이야기가 없어요. 첫 번째로 남겨 주세요.'));
+  }
+
+  t.addEventListener('input',function(){c.textContent=t.value.length+' / 300';b.disabled=!t.value.trim()||sending;m.textContent='';m.className='msg';help.innerHTML=''});
+
+  b.addEventListener('click',async function(){
+    var text=t.value.trim();if(!text||sending)return;
+    if(CRISIS.test(text)){
+      help.innerHTML='';var h=el('div','help');
+      h.appendChild(el('div','','적어 주셔서 고마워요. 이 글은 공유하지 않았어요. 지금 많이 힘들다면 혼자 견디지 말고 전화로 이야기해 보세요.'));
+      var a=el('a','','109 자살예방상담전화 (24시간)');a.href='tel:109';h.appendChild(a);
+      h.appendChild(el('div','','당장 위험하다면 119에 연락해 주세요.'));help.appendChild(h);return}
+    if(PII.test(text)){m.className='msg warn';m.textContent='전화번호나 이메일, 아이디가 보여요. 지우고 다시 적어 주세요.';return}
+    sending=true;b.disabled=true;b.textContent='공유 중…';
+    var id='s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+    var rec={text:text,created_at:Date.now()};
+    var ok=false;
+    if(db){try{await db.collection('stories').doc(id).set(rec);ok=true}catch(e){ok=false}}
+    if(!ok){var a=loadLocal();a.unshift(Object.assign({id:id},rec));saveLocal(a)}
+    if(!db||!ok){posts.unshift(Object.assign({id:id},rec))}
+    mine[id]=true;sending=false;t.value='';c.textContent='0 / 300';b.textContent='공유하기';
+    m.className='msg';m.textContent='공유됐어요. 아래에서 다른 사람들의 이야기도 읽어 보세요.';
+    unlock();render();document.getElementById('n').scrollIntoView({behavior:'smooth',block:'start'})});
+
+  posts=loadLocal();render();
+  try{if(localStorage.getItem(LSK)==='1')unlock()}catch(e){}
+  (async function(){
+    try{
+      if(typeof claude==='undefined'||!claude.use)return;
+      var d=await Promise.race([claude.use('db'),new Promise(function(r){setTimeout(function(){r(null)},10000)})]);
+      if(!d)return;db=d;
+      db.collection('stories').orderBy('created_at','desc').limit(300).onSnapshot(function(snap){
+        var out=[];(snap.docs||[]).forEach(function(x){var v=typeof x.data==='function'?x.data():x.data;if(v&&v.text)out.push({id:x.id,text:String(v.text),created_at:+v.created_at||0})});
+        posts=out;render()},function(){});
+    }catch(e){}
+  })();
+})();
+</script>
+</body>
+</html>
