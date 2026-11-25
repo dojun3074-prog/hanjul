@@ -3,250 +3,140 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>불안 한 줄</title>
+<title>불안 한 줄 — 여러분의 이야기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#26233a;--mute:#6b6880;--line:#e4e0f2;--bg1:#f3effc;--bg2:#fbeaf0;--acc:#6a58d0;--acc2:#4b3bb0;--soft:#ece8fb;--card:#fff;--warn:#b3402f}
+:root{--ink:#26233a;--mute:#6b6880;--line:#e4e0f2;--bg1:#f3effc;--bg2:#fbeaf0;--acc:#6a58d0;--acc2:#4b3bb0;--card:#fff}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--bg1),var(--bg2));min-height:100vh;line-height:1.6;-webkit-text-size-adjust:100%}
-main{max-width:440px;margin:0 auto;padding:20px 18px 48px}
-.top{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--mute);margin-bottom:18px}
-.dots{display:flex;gap:6px}.dots i{width:22px;height:4px;border-radius:2px;background:var(--line)}.dots i.on{background:var(--acc)}
-h1{font-size:30px;line-height:1.3;margin:28px 0 12px;letter-spacing:-.5px}
-h1 em{font-style:normal;background:linear-gradient(transparent 62%,#cdbff7 62%)}
-h2{font-size:21px;line-height:1.4;margin:6px 0 14px;letter-spacing:-.3px}
-p{margin:0 0 12px}
-.lead{font-size:16px;color:#3d3a55}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 2px 10px rgba(106,88,208,.06)}
-.note{font-size:12.5px;color:var(--mute);line-height:1.55}
-.btn{display:block;width:100%;border:0;border-radius:14px;padding:15px 16px;font:700 16px inherit;font-family:inherit;color:#fff;background:var(--acc);cursor:pointer;margin-top:14px}
+body{font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--bg1),var(--bg2));background-attachment:fixed;min-height:100vh;line-height:1.6;-webkit-text-size-adjust:100%}
+main{max-width:460px;margin:0 auto;padding:0 20px 56px}
+.hero{text-align:center;padding:72px 0 30px}
+.brand{font-size:12.5px;letter-spacing:.08em;color:var(--mute);margin-bottom:22px}
+.q{font-size:24px;font-weight:800;line-height:1.55;letter-spacing:-.5px;margin:0;word-break:keep-all}
+.q em{font-style:normal;background:linear-gradient(transparent 60%,#d9cef9 60%)}
+.ask{font-size:14px;color:var(--mute);margin:26px 0 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 4px 18px rgba(106,88,208,.08)}
+textarea{width:100%;min-height:120px;border:0;padding:4px;font:400 16px/1.65 inherit;font-family:inherit;color:var(--ink);resize:none;background:transparent}
+textarea:focus{outline:none}
+.row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
+.cnt{font-size:12px;color:var(--mute)}
+.btn{border:0;border-radius:12px;padding:10px 20px;font:700 15px inherit;font-family:inherit;color:#fff;background:var(--acc);cursor:pointer}
 .btn:active{background:var(--acc2)}.btn[disabled]{background:#c9c3e6;cursor:not-allowed}
-.btn.ghost{background:transparent;color:var(--acc2);border:1.5px solid var(--acc);}
-.link{background:none;border:0;color:var(--acc2);font:500 13.5px inherit;font-family:inherit;padding:6px 0;cursor:pointer;text-decoration:underline}
-.q{font-size:20px;font-weight:700;line-height:1.5;margin:4px 0 14px}
-textarea{width:100%;min-height:112px;border:1.5px solid var(--line);border-radius:14px;padding:14px;font:400 16px/1.6 inherit;font-family:inherit;color:var(--ink);resize:none;background:#fcfbff}
-textarea:focus{outline:2px solid #bdb2f0;border-color:var(--acc)}
-.row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--mute);margin-top:6px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 2px}
-.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font:500 13.5px inherit;font-family:inherit;color:var(--ink);cursor:pointer}
-.chip.on{background:var(--soft);border-color:var(--acc);color:var(--acc2);font-weight:700}
-.err{color:var(--warn);font-size:13.5px;margin-top:8px;min-height:20px}
-.label{font-size:12.5px;font-weight:700;color:var(--mute);margin:16px 0 4px}
-.tabs{display:flex;gap:6px;margin:6px 0 12px}
-.tab{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:9px;font:500 13.5px inherit;font-family:inherit;color:var(--mute);cursor:pointer}
-.tab.on{background:var(--soft);border-color:var(--acc);color:var(--acc2);font-weight:700}
-.post{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 15px;margin:10px 0}
-.post p{margin:0 0 10px;font-size:15.5px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
-.meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--mute);gap:8px}
-.meta span b{font-weight:500;background:var(--soft);color:var(--acc2);padding:2px 8px;border-radius:999px;margin-right:6px}
-.meta span u{text-decoration:none;color:#9a97ad}
-.me{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font:500 12.5px inherit;font-family:inherit;color:var(--ink);cursor:pointer;white-space:nowrap}
-.me.on{background:var(--soft);border-color:var(--acc);color:var(--acc2);font-weight:700}
-.mine{border-color:var(--acc);box-shadow:0 0 0 2px rgba(106,88,208,.12)}
-.tag-ex{font-size:11px;color:#8a7bd0;border:1px dashed #b9aeea;border-radius:6px;padding:0 6px;margin-left:4px}
-.mood{display:flex;gap:4px;margin:8px 0 0}
-.mood button{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:8px 0;font:500 13px inherit;font-family:inherit;cursor:pointer;color:var(--ink)}
-.mood button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-.help{background:#fff6f2;border:1.5px solid #f0c8bb}
-.help a{color:var(--warn);font-weight:700;font-size:22px;text-decoration:none}
-.ok{background:var(--soft);border-radius:14px;padding:14px 15px;font-size:14.5px;margin:10px 0}
-.foot{text-align:center;margin-top:26px}
-.pill{display:inline-block;font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--mute)}
-.adm .post p{margin-bottom:8px}.adm .acts{display:flex;gap:8px}.adm .acts button{flex:1}
+.msg{font-size:13px;margin:10px 2px 0;color:var(--acc2);min-height:1em}
+.msg.warn{color:#b3402f}
+.help{background:#fff4f2;border:1px solid #f1cfc9;border-radius:14px;padding:14px;margin-top:12px;font-size:14px}
+.help a{display:inline-block;margin-top:8px;font-weight:700;color:#b3402f}
+h2{font-size:17px;margin:44px 0 6px;display:flex;justify-content:space-between;align-items:baseline}
+h2 span{font-size:12.5px;font-weight:500;color:var(--mute)}
+.list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.post{background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.post p{margin:0;font-size:15px;white-space:pre-wrap;word-break:break-word}
+.post .meta{font-size:11.5px;color:var(--mute);margin-top:8px}
+.post.mine{border-color:#bdb2f0;background:#fff}
+.ex{display:inline-block;font-size:10.5px;padding:0 6px;border:1px solid var(--line);border-radius:6px;margin-left:6px}
+.empty{font-size:13.5px;color:var(--mute);text-align:center;padding:18px 0}
+.lock{font-size:13px;color:var(--mute);text-align:center;margin:28px 0 0}
+[hidden]{display:none!important}
+.foot{font-size:11.5px;color:var(--mute);text-align:center;margin-top:40px;line-height:1.7}
 </style>
 </head>
 <body>
-<main id="app"></main>
+<main>
+  <section class="hero">
+    <div class="brand">불안 한 줄</div>
+    <p class="q">요즘 내 머릿속을<br>가장 자주 찾아오는 생각은<br><em>‘이미 지나간 일’</em>인가요,<br>아니면 <em>‘아직 오지 않은 내일’</em>인가요?</p>
+    <p class="ask">여러분의 이야기를 공유해주세요</p>
+  </section>
+
+  <div class="box">
+    <textarea id="t" maxlength="300" placeholder="떠오르는 생각을 자유롭게 적어 주세요"></textarea>
+    <div class="row"><span class="cnt" id="c">0 / 300</span><button class="btn" id="b" disabled>공유하기</button></div>
+  </div>
+  <div class="msg" id="m"></div>
+  <div id="help"></div>
+
+  <p class="lock" id="lock">🔒 내 이야기를 공유하면 다른 사람들의 이야기가 열려요</p>
+  <section id="wall" hidden>
+    <h2>모두의 이야기 <span id="n"></span></h2>
+    <div class="list" id="list"></div>
+  </section>
+
+  <p class="foot">익명으로 공유되며 로그인은 필요 없어요.<br>이름·연락처처럼 나를 알 수 있는 정보는 적지 말아 주세요.<br>마음이 많이 힘들다면 109(자살예방상담전화)에서 24시간 이야기할 수 있어요.</p>
+</main>
 <script>
 (function(){
-  var PROMPTS=[
-    {id:'p1',q:'오늘 마음이 쪼여든 순간이 있었다면, 그때 무슨 일이 있었나요?'},
-    {id:'p2',q:'지금 몇 시고, 어디에서 어떤 생각이 계속 돌고 있나요?'},
-    {id:'p3',q:'불안할 때 몸에서 가장 먼저 반응하는 곳이 어디예요?'},
-    {id:'p4',q:'연락을 기다리는 동안 실제로 한 행동은 무엇이었나요?'},
-    {id:'p5',q:'상대 말을 들은 뒤 머릿속에 가장 크게 남은 한 문장은요?'},
-    {id:'p6',q:'지금 아무것도 고치지 않고 적을 수 있는 한 줄이 있다면?'}
-  ];
-  var TAGS=['친구','연애','모임','가족','학교·직장','혼자 있을 때'];
-  var SEEDS=[
-    ['아침','친구','읽씹 당한 카톡을 출근하는 내내 다시 열었다 닫았다 했다.'],
-    ['아침','모임','단톡방에 내가 쓴 말만 안 읽어서 손바닥이 차가워졌다.'],
-    ['오전','학교·직장','팀플 조 편성 발표 전인데 심장이 목까지 올라온 느낌이다.'],
-    ['오전','연애','답장이 없어서 폰을 뒤집어 놓고도 자꾸 뒤집어 본다.'],
-    ['점심','모임','점심 자리에서 내 말이 끝난 뒤 조용해져서 밥이 목에 안 넘어갔다.'],
-    ['점심','친구','인스타 스토리를 본 흔적이 뜨는데 답이 없다. 자꾸 시계를 본다.'],
-    ['오후','학교·직장','선배가 나한테만 말을 짧게 했다. 그 뒤로 일이 손에 안 잡혔다.'],
-    ['오후','친구','친구가 늘 나를 먼저 찾아야 만나는 것 같아서 먼저 연락을 못 하겠다.'],
-    ['저녁','모임','모임에서 집에 오는 길에 내가 한 말을 하나씩 되감고 있다.'],
-    ['저녁','연애','연락 빈도가 줄었다. 물어보면 귀찮게 할 것 같아 참고 있다.'],
-    ['저녁','가족','집에서 밥 먹는데 어떤 말을 꺼내야 할지 계속 고르다 한마디도 못 했다.'],
-    ['밤','혼자 있을 때','침대에 누웠는데 낮에 들었던 대화가 자꾸 재생된다.'],
-    ['밤','친구','새벽 1시에 카톡 창을 열었다 닫았다. 이런 건 나만 그런가 싶다.'],
-    ['밤','혼자 있을 때','남의 모임 사진을 보다 가슴이 답답해져서 폰을 내려놓았다.'],
-    ['밤','연애','적고 나니 조금 덜어졌다. 지금은 숨을 한 번 크게 쉬었다.'],
-    ['밤','가족','엄마 말투가 날카로웠다. 그 뒤로 방에서 한참 가만히 있었다.']
-  ];
+  // 시연용 초기 글 (실제 운영 전에 SEED=[] 로 비우면 사라져요)
+  var SEED=[
+    ['2026-11-25T23:47','지나간 일이요. 오늘 회의 때 제가 한 말이 계속 떠올라서 아직도 못 자고 있어요. 다들 별생각 없었을 텐데.'],
+    ['2026-11-25T08:12','출근길마다 내일이 먼저 와요. 아직 시작도 안 한 일 걱정하느라 정작 오늘을 놓치는 느낌.'],
+    ['2026-11-24T21:35','둘 다인데 순서가 있어요. 어제 실수한 거 곱씹다가 → 그래서 내일도 망칠 것 같다로 넘어가요.'],
+    ['2026-11-24T13:03','다음 주 면접이요. 아직 날짜도 안 왔는데 머릿속으로는 벌써 열 번은 떨어졌어요.'],
+    ['2026-11-23T01:18','헤어진 지 꽤 됐는데 그때 그 말만 안 했으면 어땠을까 하는 생각이 자꾸 찾아와요.'],
+    ['2026-11-22T17:56','저는 아직 오지 않은 내일 쪽. 졸업하고 뭐 하지, 그 질문이 하루에도 몇 번씩 와요.'],
+    ['2026-11-21T22:40','단톡방에 보낸 메시지에 아무도 답이 없던 순간이 몇 시간째 머물러 있어요. 이미 지나간 일인데도요.'],
+    ['2026-11-20T07:51','눈 뜨자마자 오늘 할 일 목록이 걱정으로 바뀌어요. 적어 보니 생각보다 별거 아닌 것도 많네요.'],
+    ['2026-11-18T19:24','친구랑 어색해진 게 지난달 일인데 아직도 매일 한 번씩 떠올라요. 먼저 연락해 볼까 고민 중이에요.'],
+    ['2026-11-16T00:32','이렇게 적고 보니 저만 그런 게 아니라서 조금 안심돼요. 오늘은 내일 걱정은 내일 하기로 했어요.']
+  ].map(function(r,i){return{id:'seed'+i,text:r[1],created_at:new Date(r[0]+':00+09:00').getTime(),seed:true}});
   var CRISIS=/(자살|자해|죽고\s*싶|죽을래|죽어\s*버|죽고\s*만|목숨|사라지고\s*싶|끝내고\s*싶|살기\s*싫|살고\s*싶지)/;
   var PII=/(0\d{1,2}[-\s.]?\d{3,4}[-\s.]?\d{4})|([\w.+-]+@[\w-]+\.[\w.]+)|(@[\w.]{3,})/;
-  /* ===== 운영자가 채우는 설정 (README 참고) ===== */
-  var CONFIG={
-    FORM_ACTION:'https://docs.google.com/forms/d/e/1FAIpQLSesOuzkjdoY6DKfUpEQicptZFnGWE-tTnjnZ-uVwKc-QSqciA/formResponse',   // 예: https://docs.google.com/forms/d/e/XXXX/formResponse
-    ENTRY:{text:'entry.1140560662',tag:'entry.725800576',hour_bucket:'entry.2119897468',prompt_id:'entry.1080497481',mood:'entry.1458421013',kind:'entry.1178313419'}, // 예: 'entry.123456789'
-    SHEET_CSV:'https://docs.google.com/spreadsheets/d/e/2PACX-1vSjZYTqBjG7Lj_HWBX4NpCpMHMuTKsqtkXRQsd_LZIGDzFEKzZtSUW602YNT3YTUnui4o0Rs_dTkvzV/pub?gid=813712824&single=true&output=csv'      // 시트 '공개' 탭의 웹 게시 CSV 주소
-  };
-  var LIVE=!!(CONFIG.FORM_ACTION&&CONFIG.SHEET_CSV);
-  var app=document.getElementById('app');
-  var S={screen:'intro',prompt:rnd(),tag:null,text:'',moodBefore:null,moodAfter:null,err:'',
-    approved:[],mineId:null,mineText:null,filter:'now',meSet:{}};
+  var LS='hanjul_stories_v2',LSK='hanjul_shared_v2';
+  function unlock(){document.getElementById('wall').hidden=false;document.getElementById('lock').hidden=true;try{localStorage.setItem(LSK,'1')}catch(e){}}
+  var t=document.getElementById('t'),b=document.getElementById('b'),c=document.getElementById('c'),
+      m=document.getElementById('m'),help=document.getElementById('help'),list=document.getElementById('list'),n=document.getElementById('n');
+  var posts=[],mine={},db=null,sending=false;
 
-  function rnd(prev){var p;do{p=PROMPTS[Math.floor(Math.random()*PROMPTS.length)]}while(prev&&p.id===prev.id);return p}
-  function bucket(h){if(h===undefined)h=new Date().getHours();
-    if(h>=5&&h<9)return'아침';if(h>=9&&h<12)return'오전';if(h>=12&&h<14)return'점심';
-    if(h>=14&&h<18)return'오후';if(h>=18&&h<22)return'저녁';return'밤'}
-  function el(t,c,tx){var e=document.createElement(t);if(c)e.className=c;if(tx!==undefined)e.textContent=tx;return e}
-  function steps(n){var d=el('div','dots');for(var i=1;i<=3;i++){var x=el('i',i<=n?'on':'');d.appendChild(x)}return d}
-  function top(n){var t=el('div','top');t.appendChild(el('span','','불안 한 줄'));if(n)t.appendChild(steps(n));return t}
+  function el(tag,cls,tx){var e=document.createElement(tag);if(cls)e.className=cls;if(tx!==undefined)e.textContent=tx;return e}
+  function ago(ts){var d=new Date(ts),h=d.getHours(),mi=('0'+d.getMinutes()).slice(-2);
+    return d.getFullYear()+'. '+(d.getMonth()+1)+'. '+d.getDate()+'.  '+(h<12?'오전 ':'오후 ')+((h%12)||12)+':'+mi}
+  function loadLocal(){try{return JSON.parse(localStorage.getItem(LS)||'[]')}catch(e){return[]}}
+  function saveLocal(a){try{localStorage.setItem(LS,JSON.stringify(a.slice(0,500)))}catch(e){}}
 
-  /* ---------- storage (Google Form + Sheet) ---------- */
-  function parseCSV(t){
-    var rows=[],r=[],c='',q=false;
-    for(var i=0;i<t.length;i++){var ch=t[i];
-      if(q){if(ch==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
-      else if(ch==='"')q=true;
-      else if(ch===','){r.push(c);c=''}
-      else if(ch==='\n'){r.push(c);rows.push(r);r=[];c=''}
-      else if(ch!=='\r')c+=ch}
-    if(c||r.length){r.push(c);rows.push(r)}
-    return rows}
-  async function loadApproved(){
-    if(!LIVE)return;
-    try{
-      var res=await fetch(CONFIG.SHEET_CSV+(CONFIG.SHEET_CSV.indexOf('?')>-1?'&':'?')+'t='+Date.now());
-      var rows=parseCSV(await res.text());
-      S.approved=rows.filter(function(r){return r[0]&&r[0].trim()}).map(function(r,i){
-        return{id:'r'+i,text:r[0].trim(),tag:(r[1]||'').trim(),hour_bucket:(r[2]||'').trim()}});
-      if(S.screen==='read')render();
-    }catch(e){}}
-  async function send(fields){
-    if(!LIVE)return false;
-    var fd=new URLSearchParams();
-    Object.keys(CONFIG.ENTRY).forEach(function(k){if(fields[k]!==undefined&&fields[k]!==null)fd.append(CONFIG.ENTRY[k],String(fields[k]))});
-    try{await fetch(CONFIG.FORM_ACTION,{method:'POST',mode:'no-cors',body:fd});return true}catch(e){return false}}
-  async function savePost(){
-    S.mineId='mine';S.mineText=S.text;
-    return send({kind:'post',text:S.text,tag:S.tag||'',hour_bucket:bucket(),prompt_id:S.prompt.id,mood:S.moodBefore===null?'':S.moodBefore})}
-  async function saveMood(){
-    if(S.moodAfter===null||!S.mineId)return;
-    await send({kind:'mood_after',text:'',tag:'',hour_bucket:bucket(),prompt_id:S.prompt.id,mood:S.moodAfter})}
-
-  /* ---------- screens ---------- */
-  function intro(){
-    var f=document.createDocumentFragment();f.appendChild(top(0));
-    var h=el('h1');h.innerHTML='나만 <em>그런 걸까?</em>';f.appendChild(h);
-    f.appendChild(el('p','lead','지금 느끼는 마음에 이름을 붙이지 않아도 괜찮아요. 오늘 있었던 장면을 한 줄로 적고, 비슷한 장면을 적은 사람들의 글을 읽어 보세요.'));
-    var c=el('div','card');
-    c.appendChild(el('p','','1. 질문 하나에 한 줄로 답해요 (80자 이내)'));
-    c.appendChild(el('p','','2. 같은 시간대에 다른 사람들이 쓴 한 줄을 읽어요'));
-    c.appendChild(el('p','','3. 1분이면 끝나요. 로그인도, 댓글도 없어요'));
-    f.appendChild(c);
-    f.appendChild(el('p','note','익명으로 쓰이고, 글은 운영자가 확인한 뒤 공개돼요. 이 페이지는 상담이나 치료가 아니에요. 지금 많이 힘들다면 109(자살예방상담전화)에 전화할 수 있어요.'));
-    var b=el('button','btn','한 줄 써보기');b.onclick=function(){S.screen='write';render()};f.appendChild(b);
-    return f}
-  function write(){
-    var f=document.createDocumentFragment();f.appendChild(top(1));
-    f.appendChild(el('p','note','오늘의 질문'));
-    f.appendChild(el('div','q',S.prompt.q));
-    var ta=el('textarea');ta.maxLength=80;ta.placeholder='장면이나 몸의 감각을 있는 그대로 적어 주세요';ta.value=S.text;f.appendChild(ta);
-    var row=el('div','row');var cnt=el('span','',S.text.length+' / 80');
-    var sk=el('button','link','다른 질문');sk.onclick=function(){S.text=ta.value;S.prompt=rnd(S.prompt);render()};
-    row.appendChild(cnt);row.appendChild(sk);f.appendChild(row);
-    f.appendChild(el('div','label','어떤 상황이었나요? (선택)'));
-    var ch=el('div','chips');
-    TAGS.forEach(function(t){var c=el('button','chip'+(S.tag===t?' on':''),t);c.onclick=function(){S.text=ta.value;S.tag=(S.tag===t?null:t);render()};ch.appendChild(c)});
-    f.appendChild(ch);
-    f.appendChild(el('div','label','지금 기분은 어때요? 0(많이 힘듦) ~ 10(편안함) (선택)'));
-    f.appendChild(moodRow('moodBefore',ta));
-    var er=el('div','err',S.err);f.appendChild(er);
-    var b=el('button','btn','남기고 다른 사람 글 읽기');b.disabled=S.text.trim().length<5;
-    ta.oninput=function(){S.text=ta.value;cnt.textContent=ta.value.length+' / 80';b.disabled=ta.value.trim().length<5;er.textContent=''};
-    b.onclick=async function(){
-      var t=ta.value.trim();S.text=t;
-      if(CRISIS.test(t)){S.screen='crisis';S.text='';render();return}
-      if(PII.test(t)){S.err='전화번호나 이메일, 아이디가 보여요. 지우고 다시 적어 주세요.';render();return}
-      S.err='';b.disabled=true;b.textContent='남기는 중…';
-      await savePost();S.screen='read';render()};
-    f.appendChild(b);
-    f.appendChild(el('p','note','이름·연락처·학교·직장처럼 나를 알 수 있는 정보는 쓰지 말아 주세요.'));
-    return f}
-  function moodRow(key,ta){
-    var m=el('div','mood');
-    for(var i=0;i<=10;i++)(function(i){var b=el('button',S[key]===i?'on':'',String(i));
-      b.onclick=function(){if(ta)S.text=ta.value;S[key]=(S[key]===i?null:i);if(key==='moodAfter')saveMood();render()};m.appendChild(b)})(i);
-    return m}
-  function crisis(){
-    var f=document.createDocumentFragment();f.appendChild(top(0));
-    var c=el('div','card help');
-    c.appendChild(el('h2','','지금 많이 힘들어 보여요'));
-    c.appendChild(el('p','','적어 주셔서 고마워요. 이 글은 저장하거나 공개하지 않았어요. 지금 마음이 너무 힘들다면 혼자 견디지 말고 전화로 이야기해 보세요.'));
-    var a=el('a','','109 자살예방상담전화');a.href='tel:109';c.appendChild(a);
-    c.appendChild(el('p','note','번호가 눌리지 않으면 직접 109를 눌러 주세요. 24시간 운영돼요. 당장 위험하면 119에 연락해 주세요.'));
-    f.appendChild(c);
-    var b=el('button','btn ghost','처음으로');b.onclick=function(){S.screen='intro';S.text='';render()};f.appendChild(b);
-    return f}
-  function postCard(p,mine){
-    var d=el('div','post'+(mine?' mine':''));
-    d.appendChild(el('p','',p.text));
-    var m=el('div','meta');var l=el('span');
-    if(p.tag){l.appendChild(el('b','',p.tag))}
-    l.appendChild(el('u','',(mine?'방금 · ':'')+p.hour_bucket));
-    if(p.ex)l.appendChild(el('span','tag-ex','예시'));
-    m.appendChild(l);
-    if(!mine){var k=p.key;var b=el('button','me'+(S.meSet[k]?' on':''),S.meSet[k]?'나도 ✓':'나도');
-      b.onclick=function(){S.meSet[k]=!S.meSet[k];render()};m.appendChild(b)}
-    d.appendChild(m);return d}
-  function read(){
-    var f=document.createDocumentFragment();f.appendChild(top(2));
-    f.appendChild(el('h2','','한 줄 남겨 주셔서 고마워요'));
-    if(S.mineText){
-      f.appendChild(postCard({text:S.mineText,tag:S.tag,hour_bucket:bucket(),key:'mine'},true));
-      f.appendChild(el('div','ok',LIVE?'운영자가 확인한 뒤 공개돼요. 지금은 나만 볼 수 있어요.':'지금은 미리보기 상태라 이 글은 이 화면에서만 보여요.'))}
-    f.appendChild(el('p','lead','비슷한 시간대에 다른 사람들이 적은 한 줄이에요. 같은 장면을 지나온 사람들이 있어요.'));
-    var tabs=el('div','tabs');var cur=bucket();
-    [['now','지금 시간대('+cur+')'],['all','전체']].forEach(function(t){
-      var b=el('button','tab'+(S.filter===t[0]?' on':''),t[1]);b.onclick=function(){S.filter=t[0];render()};tabs.appendChild(b)});
-    f.appendChild(tabs);
-    var real=S.approved.map(function(p){return{text:p.text,tag:p.tag,hour_bucket:p.hour_bucket,key:'r'+p.id,ex:false}});
-    var seeds=SEEDS.map(function(s,i){return{text:s[2],tag:s[1],hour_bucket:s[0],key:'s'+i,ex:true}});
-    var all=real.concat(seeds);
-    var list=S.filter==='now'?all.filter(function(p){return p.hour_bucket===cur}):all;
-    if(!list.length)list=all;
-    list.slice(0,20).forEach(function(p){f.appendChild(postCard(p,false))});
-    f.appendChild(el('p','note','"예시"는 서비스가 처음 열릴 때 기획자가 쓴 글이에요. 실제 이용자 글이 쌓이면 줄여 나가요. 글에는 숫자나 순위를 보여주지 않아요.'));
-    var b=el('button','btn','마무리하기');b.onclick=function(){S.screen='close';render()};f.appendChild(b);
-    return f}
-  function close(){
-    var f=document.createDocumentFragment();f.appendChild(top(3));
-    f.appendChild(el('h2','','이름 대신, 장면 그대로'));
-    var c=el('div','card');
-    c.appendChild(el('p','','오늘 적은 것은 "나는 이런 사람"이라는 이름이 아니라 "이런 일이 있었고, 몸이 이렇게 반응했다"는 장면이에요.'));
-    c.appendChild(el('p','','비유하자면 첫 번째 화살(있었던 일)은 있는 그대로 보고, 두 번째 화살(그래서 나는 이런 사람이라는 해석)은 잠시 내려놓는 연습이에요. 한 번으로 불안이 사라지지는 않지만, 줄어들 여지가 있다는 연구가 있어요.'));
-    f.appendChild(c);
-    f.appendChild(el('div','label','읽고 나서 지금 기분은요? (선택)'));
-    f.appendChild(moodRow('moodAfter'));
-    var h=el('div','card');
-    h.appendChild(el('p','','마음이 계속 힘들다면 109(자살예방상담전화)나 가까운 정신건강복지센터에서 이야기할 수 있어요.'));
-    h.appendChild(el('p','note','이 페이지는 상담이 아니고, 쓴 글은 익명으로만 쓰여요.'));
-    f.appendChild(h);
-    var b=el('button','btn ghost','한 줄 더 써보기');b.onclick=function(){S.text='';S.tag=null;S.moodBefore=null;S.moodAfter=null;S.mineText=null;S.mineId=null;S.prompt=rnd(S.prompt);S.screen='write';render()};f.appendChild(b);
-    return f}
   function render(){
-    app.innerHTML='';
-    var m={intro:intro,write:write,crisis:crisis,read:read,close:close}[S.screen]||intro;
-    app.appendChild(m());
-    if(S.last!==S.screen){S.last=S.screen;window.scrollTo(0,0)}}
-  render();loadApproved();
+    list.innerHTML='';
+    var rows=posts.concat(SEED).sort(function(a,b){return b.created_at-a.created_at});
+    n.textContent=rows.length?rows.length+'개':'';
+    rows.forEach(function(p){
+      var d=el('div','post'+(mine[p.id]?' mine':''));d.appendChild(el('p','',p.text));
+      d.appendChild(el('div','meta',(mine[p.id]?'내 글 · ':'')+ago(p.created_at)));list.appendChild(d)});
+    if(!rows.length)list.appendChild(el('div','empty','아직 올라온 이야기가 없어요. 첫 번째로 남겨 주세요.'));
+  }
+
+  t.addEventListener('input',function(){c.textContent=t.value.length+' / 300';b.disabled=!t.value.trim()||sending;m.textContent='';m.className='msg';help.innerHTML=''});
+
+  b.addEventListener('click',async function(){
+    var text=t.value.trim();if(!text||sending)return;
+    if(CRISIS.test(text)){
+      help.innerHTML='';var h=el('div','help');
+      h.appendChild(el('div','','적어 주셔서 고마워요. 이 글은 공유하지 않았어요. 지금 많이 힘들다면 혼자 견디지 말고 전화로 이야기해 보세요.'));
+      var a=el('a','','109 자살예방상담전화 (24시간)');a.href='tel:109';h.appendChild(a);
+      h.appendChild(el('div','','당장 위험하다면 119에 연락해 주세요.'));help.appendChild(h);return}
+    if(PII.test(text)){m.className='msg warn';m.textContent='전화번호나 이메일, 아이디가 보여요. 지우고 다시 적어 주세요.';return}
+    sending=true;b.disabled=true;b.textContent='공유 중…';
+    var id='s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+    var rec={text:text,created_at:Date.now()};
+    var ok=false;
+    if(db){try{await db.collection('stories').doc(id).set(rec);ok=true}catch(e){ok=false}}
+    if(!ok){var a=loadLocal();a.unshift(Object.assign({id:id},rec));saveLocal(a)}
+    if(!db||!ok){posts.unshift(Object.assign({id:id},rec))}
+    mine[id]=true;sending=false;t.value='';c.textContent='0 / 300';b.textContent='공유하기';
+    m.className='msg';m.textContent='공유됐어요. 아래에서 다른 사람들의 이야기도 읽어 보세요.';
+    unlock();render();document.getElementById('n').scrollIntoView({behavior:'smooth',block:'start'})});
+
+  posts=loadLocal();render();
+  try{if(localStorage.getItem(LSK)==='1')unlock()}catch(e){}
+  (async function(){
+    try{
+      if(typeof claude==='undefined'||!claude.use)return;
+      var d=await Promise.race([claude.use('db'),new Promise(function(r){setTimeout(function(){r(null)},10000)})]);
+      if(!d)return;db=d;
+      db.collection('stories').orderBy('created_at','desc').limit(300).onSnapshot(function(snap){
+        var out=[];(snap.docs||[]).forEach(function(x){var v=typeof x.data==='function'?x.data():x.data;if(v&&v.text)out.push({id:x.id,text:String(v.text),created_at:+v.created_at||0})});
+        posts=out;render()},function(){});
+    }catch(e){}
+  })();
 })();
 </script>
 </body>
