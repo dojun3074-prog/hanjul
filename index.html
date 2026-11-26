@@ -83,7 +83,7 @@ h2 span{font-size:12.5px;font-weight:500;color:var(--mute)}
   var CRISIS=/(자살|자해|죽고\s*싶|죽을래|죽어\s*버|죽고\s*만|목숨|사라지고\s*싶|끝내고\s*싶|살기\s*싫|살고\s*싶지)/;
   var PII=/(0\d{1,2}[-\s.]?\d{3,4}[-\s.]?\d{4})|([\w.+-]+@[\w-]+\.[\w.]+)|(@[\w.]{3,})/;
   var LS='hanjul_stories_v2',LSK='hanjul_shared_v2';
-  function unlock(){document.getElementById('wall').hidden=false;document.getElementById('lock').hidden=true;try{localStorage.setItem(LSK,'1')}catch(e){}}
+  function unlock(){document.getElementById('wall').hidden=false;document.getElementById('lock').hidden=true}
   var t=document.getElementById('t'),b=document.getElementById('b'),c=document.getElementById('c'),
       m=document.getElementById('m'),help=document.getElementById('help'),list=document.getElementById('list'),n=document.getElementById('n');
   var posts=[],mine={},db=null,sending=false;
@@ -126,7 +126,6 @@ h2 span{font-size:12.5px;font-weight:500;color:var(--mute)}
     unlock();render();document.getElementById('n').scrollIntoView({behavior:'smooth',block:'start'})});
 
   posts=loadLocal();render();
-  try{if(localStorage.getItem(LSK)==='1')unlock()}catch(e){}
   (async function(){
     try{
       if(typeof claude==='undefined'||!claude.use)return;
